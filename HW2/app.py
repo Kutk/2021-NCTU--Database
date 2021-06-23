@@ -6,7 +6,7 @@ from sqlalchemy import and_
 
 app=Flask(__name__)
 app.secret_key = "hahaha"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://ku:zack1231@127.0.0.1:3306/dbhw"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://<username>:<passwd>@127.0.0.1:3306/dbhw"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
