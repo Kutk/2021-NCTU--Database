@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+	<title>Order</title>
+</head>
+<body>
+    {% if key == 1 %}
+		<script>
+			alert("This order has been modified! \nPlease check again!")
+		</script>
+    {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffa101;">
+		<div class="container-fluid">
+    		<a class="navbar-brand" href="/home">Home</a>
+	    	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      		<span class="navbar-toggler-icon"></span>
+	    	</button>
+	    	<div class="collapse navbar-collapse" id="navbarNav">
+	      		<ul class="navbar-nav">
+	        		<li class="nav-item">
+	          			<a class="nav-link active" aria-current="page" href="/shop">Shop</a>
+	        		</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/myorder">My Order</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/shoporder">Shop Order</a>
+					</li>
+		        	<li class="nav-item">
+		          		<a class="nav-link" href="/logout">Logout</a>
+		        	</li>
+	      		</ul>
+	    	</div>
+  		</div>
+	</nav>
+	<h1>My Order</h1>
+    <br>
+    <div class="pos col-2">
+        <form action="/search_myorder" method="post">
+            <h4>Status</h4>
+            <select name = "Status" class="form-select" aria-label="Default select example">
+                <option value="">All</option>
+                <option value="not finished">Not Finished</option>
+                <option value="finished">Finished</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+            <input type="submit" class="btn btn-primary mb-3" value="Search">
+        </form>
+    </div>
+    <div class="pos col-10">
+        <table class="table table-success table-striped">
+            <head>
+                <tr>
+                    <th>OID</th>
+                    <th>Status</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Shop</th>
+                    <th>Total Price</th>
+                    <th>Action</th>
+                </tr>
+            </head>
+            <body>
+                {% for order in orders: %}
+                    {% if order.status == "not finished" %}
+                        <tr>
+                            <td>{{ order.oid }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.startt }}<br>{{ order.cname }}</td>
+                            <td></td>
+                            <td>{{ order.shopname }}</td>
+                            <td>${{ order.price * order.amount }}<br>({{ order.amount }} * ${{ order.price }})</td>
+                            <td><a href="/cancel/{{ order.oid }}"><button type="button" class="btn btn-danger">X</button></a></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ order.oid }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.startt }}<br>{{ order.cname }}</td>
+                            <td>{{ order.endt }}<br>{{ order.ender }}</td>
+                            <td>{{ order.shopname }}</td>
+                            <td>${{ order.price * order.amount }}<br>({{ order.amount }} * ${{ order.price }})</td>
+                            <td></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </body>
+        </table>
+    </div>
+</body>
+</html>
