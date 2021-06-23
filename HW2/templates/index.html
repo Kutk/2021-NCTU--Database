@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<TITLE>Login</TITLE>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<!--
+	{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            	<li>{{ msg }}</li>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+-->
+	{% if key == 1 %}
+		<script>
+			alert("login failed")
+		</script>
+	{% elif key == 2 %}
+		<script>
+			alert("register success")
+		</script>
+	{% endif %}
+	<h2>Mask Selling System</h2><br>
+	<div class="login">
+		<form id="login" method="post" action="/login">
+			<label><b>User Name</b></label>
+			<input type="text" name="Uname" id="Uname" placeholder="Username">
+			<br><br>
+
+			<label><b>Password</b></label>
+			<input type="password" name="Pass" id="Pass" placeholder="Password">
+			<br><br>
+
+			<input type="submit" name="log" id="log" value="Login">
+			<br><br>
+
+			<a href="/register">Create account</a>
+		</form>
+	</div>
+</body>
+</html>
