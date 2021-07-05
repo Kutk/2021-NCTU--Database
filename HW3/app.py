@@ -8,7 +8,7 @@ from datetime import datetime
 
 app=Flask(__name__)
 app.secret_key = "hahaha"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://<username>:<passwd>@127.0.0.1:3306/dbhw"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://<username>:<passwd>@127.0.0.1:3306/<DBname>"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
